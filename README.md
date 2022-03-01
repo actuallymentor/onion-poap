@@ -25,7 +25,7 @@ For details see [the official documentation]( https://community.torproject.org/r
 Are you in a rush?
 
 1. Buy a VPS with 1.5GB ram
-2. Run `curl -sS https://raw.githubusercontent.com/actuallymentor/❤️ | sudo bash`
+2. Run `curl -sS https://raw.githubusercontent.com/actuallymentor/onion-poap/main/setup.sh | sudo bash`
 3. Follow on screen instructions
 4. Tweet your node IP to `@actuallymentor` (mentor.eth)
 
@@ -46,14 +46,14 @@ Your provider should send you a username, password and ip address. `Ssh` into yo
 You can run the automated install script on your VPS with:
 
 ```
-curl -sS https://raw.githubusercontent.com/actuallymentor/❤️ | sudo bash
+curl -sS https://raw.githubusercontent.com/actuallymentor/onion-poap/main/setup.sh | sudo bash
 ```
 
 If you want to inspect the file locally, you can:
 
 ```
-git clone @
-cd 
+git clone https://github.com/actuallymentor/onion-poap.git
+cd onion-poap
 cat setup.sh
 sudo bash setup.sh
 ```
