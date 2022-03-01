@@ -405,7 +405,7 @@ fi
 
 echoInfo "------------------------------------------------------"
 echoInfo "To register for a POAP, tweet this at @actuallymentor"
-echoInfo "at https://twitter.com/ActuallyMentor"
+echoInfo "at https://twitter.com/ActuallyMentor/status/1498667145051492355"
 echoInfo "------------------------------------------------------\n"
 
 echoSuccess "Hey @actuallymentor, I would like to claim the Onion POAP for Tor exit node http://$REMOTE_IP"
