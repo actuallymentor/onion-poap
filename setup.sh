@@ -98,6 +98,7 @@ echoSuccess "Monthly bandwidth limit: $NODE_BANDWIDTH TB\n"
 echoInfo "Press any key to continue or ctrl+c to exit..."
 read
 
+
 echo -e $C_CYAN #cyan
 cat << "EOF"
 
@@ -111,7 +112,7 @@ EOF
 
 echo -e $C_DEFAULT #default
 echo "              [Relay Setup]"
-echo "This script will ask for your sudo password."
+echo "This script might ask for your sudo password."
 echo "----------------------------------------------------------------------"
 
 echoInfo "Updating package list..."
@@ -119,6 +120,10 @@ sudo apt-get -y update > /dev/null && echoSuccess "-> OK" || handleError
 
 echoInfo "Installing necessary packages..."
 sudo apt-get -y install apt-transport-https psmisc dirmngr ntpdate curl > /dev/null && echoSuccess "-> OK" || handleError
+
+# 🔥 install fails with old certificate package
+echoInfo "Upgrading essential packages"
+sudo apt-get -y install ca-certificates > /dev/null && echoSuccess "-> OK" || handleError
 
 echoInfo "Updating NTP..."
 # 🔥 NTP already runs on 20.04 causing issues, removing error logging
