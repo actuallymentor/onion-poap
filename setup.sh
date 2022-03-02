@@ -38,7 +38,7 @@ read
 
 # 🔥 Minor annoyance fix on some VPS systems where the hostname is not in the hosts file
 if sudo grep -q "$(hostname)" /etc/hosts; then
-  # echo "Hostname is in /etc/hosts, do nothing"
+  echo "Hostname is in /etc/hosts"
 else
   sudo echo "127.0.0.1 $( hostname )" >> /etc/hosts
 fi 
