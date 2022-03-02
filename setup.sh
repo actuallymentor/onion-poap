@@ -36,6 +36,13 @@ EOF
 
 read
 
+# 🔥 Minor annoyance fix on some VPS systems where the hostname is not in the hosts file
+if sudo grep -q "$(hostname)" /etc/hosts; then
+  # echo "Hostname is in /etc/hosts, do nothing"
+else
+  sudo echo "127.0.0.1 $( hostname )" >> /etc/hosts
+fi 
+
 ## ###############
 ## The below script is based
 ## on https://tor-relay.co/
@@ -362,13 +369,13 @@ sleep 10
 echo ""
 echoSuccess "=> Setup finished"
 echo ""
-echo "Tor will now check if your ports are reachable. This may take up to 20 minutes."
+# echo "Tor will now check if your ports are reachable. This may take up to 20 minutes."
 # 🔥 Removed references to manually checking things
 # echo "Check /var/log/tor/notices.log for an entry like:"
 # echo "\"Self-testing indicates your ORPort is reachable from the outside. Excellent.\""
 # echo ""
 
-sleep 5
+# sleep 5
 
 # 🔥 Ignore false positive prone message
 # if [ ! -f /var/log/tor/notices.log ]; then
