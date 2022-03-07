@@ -100,6 +100,8 @@ echoInfo "\n\n----------------------------------------"
 echoInfo "Onion POAP needs some information"
 echoInfo "----------------------------------------\n\n"
 
+echoError "Note: Tor needs a valid email address so you can be contacted if there is an issue."
+echoInfo "This address is public, you may want to use a dedicated email account for this, or if you use gmail use the + operator like so: yourname+tor@gmail.com. Read more about task-specific addresses here: https://support.google.com/a/users/answer/9308648?hl=en\n"
 read -p "Your email (requirement for a Tor node): " OPERATOR_EMAIL
 read -p "Node nickname (requirement for a Tor node): " NODE_NICKNAME
 read -p "Your wallet address or ENS (to receive POAP): " OPERATOR_WALLET
@@ -205,7 +207,7 @@ cat << EOF | sudo tee /etc/tor/torrc > /dev/null && echoSuccess "-> OK" || handl
   ORPort 9001
   ORPort [INSERT_IPV6_ADDRESS]:9001
   Nickname $NODE_NICKNAME
-  ContactInfo contactinfo $OPERATOR_EMAIL
+  ContactInfo $OPERATOR_EMAIL
   Log notice file /var/log/tor/notices.log
   DirPort 80
   DirPortFrontPage /etc/tor/tor-exit-notice.html
@@ -301,7 +303,7 @@ cat << EOF | sudo tee /etc/tor/torrc > /dev/null && echoSuccess "-> OK" || handl
   ORPort 9001
   ORPort [INSERT_IPV6_ADDRESS]:9001
   Nickname $NODE_NICKNAME
-  ContactInfo contactinfo $OPERATOR_EMAIL
+  ContactInfo $OPERATOR_EMAIL
   Log notice file /var/log/tor/notices.log
   DirPort 80
   DirPortFrontPage /etc/tor/tor-exit-notice.html
