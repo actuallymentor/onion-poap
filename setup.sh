@@ -101,6 +101,7 @@ echoInfo "Onion POAP needs some information"
 echoInfo "----------------------------------------\n\n"
 
 read -p "Your email (requirement for a Tor node): " OPERATOR_EMAIL
+read -p "Node nickname (requirement for a Tor node): " NODE_NICKNAME
 read -p "Your wallet address or ENS (to receive POAP): " OPERATOR_WALLET
 
 echoSuccess "\n\n----------------------------------------"
@@ -123,6 +124,11 @@ cat << "EOF"
                                  |__/
 
 EOF
+
+REMOTE_IP=$( curl ipv4.icanhazip.com 2> /dev/null )
+if [ ${#REMOTE_IP} -lt 7 ]; then
+  REMOTE_IP=$( curl ipv4.canhazip.com 2> /dev/null )
+fi
 
 echo -e $C_DEFAULT #default
 echo "              [Relay Setup]"
@@ -198,8 +204,8 @@ cat << EOF | sudo tee /etc/tor/torrc > /dev/null && echoSuccess "-> OK" || handl
   RunAsDaemon 1
   ORPort 9001
   ORPort [INSERT_IPV6_ADDRESS]:9001
-  Nickname OnionPOAP$RANDOM
-  ContactInfo contactinfo [tor-relay.co]
+  Nickname $NODE_NICKNAME
+  ContactInfo contactinfo $OPERATOR_EMAIL
   Log notice file /var/log/tor/notices.log
   DirPort 80
   DirPortFrontPage /etc/tor/tor-exit-notice.html
@@ -294,8 +300,8 @@ cat << EOF | sudo tee /etc/tor/torrc > /dev/null && echoSuccess "-> OK" || handl
   RunAsDaemon 1
   ORPort 9001
   ORPort [INSERT_IPV6_ADDRESS]:9001
-  Nickname OnionPOAP$RANDOM
-  ContactInfo contactinfo [tor-relay.co]
+  Nickname $NODE_NICKNAME
+  ContactInfo contactinfo $OPERATOR_EMAIL
   Log notice file /var/log/tor/notices.log
   DirPort 80
   DirPortFrontPage /etc/tor/tor-exit-notice.html
@@ -325,6 +331,9 @@ then
 
   # 🔥 added auto search-replace of email
   sed -i "s/FIXME_YOUR_EMAIL_ADDRESS/$OPERATOR_EMAIL/g" /etc/tor/tor-exit-notice.html
+
+  # 🔥 address name in message
+  sed -i "s/FIXME_DNS_NAME/$REMOTE_IP/g" /etc/tor/tor-exit-notice.html
 
   # 🔥 added a comment to the tor notice page with the POAP address so I can scrape it for distribution
   echo "<!-- Onion POAP address: $OPERATOR_WALLET -->" >> /etc/tor/tor-exit-notice.html
@@ -445,11 +454,7 @@ If you see no errors above, setup is complete. If you haven't already, it is hig
 
 EOF
 
-REMOTE_IP=$( curl ipv4.icanhazip.com 2> /dev/null )
-if [ ${#REMOTE_IP} -lt 7 ]; then
-  echo "derp"
-  REMOTE_IP=$( curl ipv4.canhazip.com 2> /dev/null )
-fi
+
 
 echoInfo "------------------------------------------------------"
 echoInfo "To register for a POAP, tweet this at @actuallymentor"
