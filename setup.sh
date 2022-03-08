@@ -1,6 +1,11 @@
 #!/bin/bash
 
 ## ###############
+## Force latest version
+## ###############
+git pull &> /dev/null
+
+## ###############
 ## Tor POAP config
 ## ###############
 
