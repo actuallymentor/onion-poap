@@ -34,6 +34,12 @@ Press any key to continue...
 
 EOF
 
+## ###############
+## The below script is based
+## on https://tor-relay.co/
+## edits marked with 🔥
+## ###############
+
 read
 
 # 🔥 Minor annoyance fix on some VPS systems where the hostname is not in the hosts file
@@ -43,11 +49,7 @@ else
   sudo echo "127.0.0.1 $( hostname )" >> /etc/hosts
 fi 
 
-## ###############
-## The below script is based
-## on https://tor-relay.co/
-## edits marked with 🔥
-## ###############
+
 RELEASE='focal'
 IS_EXIT=true
 IS_BRIDGE=false
@@ -81,6 +83,18 @@ function handleError() {
 }
 
 ## ###############
+## Check environment
+## ###############
+# 🔥 check for ubuntu 20.04 LTS focal
+if cat /etc/os-release | grep -q UBUNTU_CODENAME=focal; then
+  echoInfo "✅ You are on Ubuntu 20.04 codename Focal"
+else
+  echoError "⚠️ You are not on Ubuntu 20.04, this script might not work for you. Please reinstall your server as Ubuntu 20.04 LTS."
+  echoError "Press any key to continue, knowing this might fail..."
+  read
+fi
+
+## ###############
 ## Get needed data
 ## ###############
 echoInfo "\n\n----------------------------------------"
@@ -90,7 +104,7 @@ echoInfo "----------------------------------------\n\n"
 read -p "How many TB is this node allowed to use per month? (default 1 TB): " NODE_BANDWIDTH
 NODE_BANDWIDTH=${NODE_BANDWIDTH:-"1"}
 
-echo "There are 2 available exit policies in this script: ReducedExitPolicy and WebOnly."
+echo -e "\nThere are 2 available exit policies in this script: ReducedExitPolicy and WebOnly."
 echo "ReducedExitPolicy: blocks most abuse ports (like Torrents, Email, etc)"
 echo -e "WebOnly: allows for only http(s) traffic, which is only partially useful to the Network\n"
 read -p "Do you want to ReducedExitPolicy? [Y/n] (default Y): " REDUCED_EXIT_POLICY
@@ -103,13 +117,16 @@ echoInfo "----------------------------------------\n\n"
 echoError "Note: Tor needs a valid email address so you can be contacted if there is an issue."
 echoInfo "This address is public, you may want to use a dedicated email account for this, or if you use gmail use the + operator like so: yourname+tor@gmail.com. Read more about task-specific addresses here: https://support.google.com/a/users/answer/9308648?hl=en\n"
 read -p "Your email (requirement for a Tor node): " OPERATOR_EMAIL
-read -p "Node nickname (requirement for a Tor node): " NODE_NICKNAME
+
+echoInfo "\nYour node nickname is visible on the leaderboard at https://tor-relay.co/"
+read -p "Node nickname (requirement for a Tor node, fun idea: your ENS): " NODE_NICKNAME
 read -p "Your wallet address or ENS (to receive POAP): " OPERATOR_WALLET
 
 echoSuccess "\n\n----------------------------------------"
 echoSuccess "Check your information"
 echoSuccess "----------------------------------------"
 echoSuccess "POAP wallet: $OPERATOR_WALLET"
+echoSuccess "Node nickname: $NODE_NICKNAME"
 echoSuccess "Operator email: $OPERATOR_EMAIL"
 echoSuccess "Monthly bandwidth limit: $NODE_BANDWIDTH TB\n"
 echoInfo "Press any key to continue or ctrl+c to exit..."
