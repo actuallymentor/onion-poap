@@ -124,7 +124,7 @@ echoInfo "\nYour node nickname is visible on the leaderboard at https://tor-rela
 read -p "Node nickname (requirement for a Tor node, only letters and numbers): " NODE_NICKNAME
 
 # force node nickname to be only alphanumeric
-NODE_NICKNAME=$( echo $NODE_NICKNAME | tr -cd '[:alnum:]'
+NODE_NICKNAME=$( echo $NODE_NICKNAME | tr -cd '[:alnum:]' )
 
 read -p "Your wallet address or ENS (to receive POAP): " OPERATOR_WALLET
 
