@@ -119,7 +119,11 @@ echoInfo "This address is public, you may want to use a dedicated email account 
 read -p "Your email (requirement for a Tor node): " OPERATOR_EMAIL
 
 echoInfo "\nYour node nickname is visible on the leaderboard at https://tor-relay.co/"
-read -p "Node nickname (requirement for a Tor node, fun idea: your ENS): " NODE_NICKNAME
+read -p "Node nickname (requirement for a Tor node, only letters and numbers): " NODE_NICKNAME
+
+# force node nickname to be only alphanumeric
+NODE_NICKNAME=$( echo $NODE_NICKNAME | tr -cd '[:alnum:]'
+
 read -p "Your wallet address or ENS (to receive POAP): " OPERATOR_WALLET
 
 echoSuccess "\n\n----------------------------------------"
