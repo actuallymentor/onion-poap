@@ -487,8 +487,24 @@ EOF
 
 
 echoInfo "------------------------------------------------------"
-echoInfo "To register for a POAP, tweet this at @actuallymentor"
-echoInfo "at https://twitter.com/ActuallyMentor/status/1498667145051492355"
+echoInfo "Registering node with OnionDAO..."
 echoInfo "------------------------------------------------------\n"
 
-echoSuccess "Hey @actuallymentor, I would like to claim the Onion POAP for Tor exit node http://$REMOTE_IP"
+# Formulate post data format
+post_data="{"
+post_data="$post_data,\"ip\": \"$REMOTE_IP\""
+post_data="$post_data,\"email\": \"$OPERATOR_EMAIL\""
+post_data="$post_data,\"bandwidth\": \"$NODE_BANDWIDTH\""
+post_data="$post_data,\"reduced_exit_policy\": \"$REDUCED_EXIT_POLICY\""
+post_data="$post_data,\"node_nickame\": \"$NODE_NICKNAME\""
+post_data="$post_data,\"wallet\": \"$OPERATOR_WALLET\""
+post_data="$post_data}"
+
+curl -X POST https://oniondao.web.app/node/
+   -H 'Content-Type: application/json'
+   -d $post_data
+
+echoInfo "\n------------------------------------------------------"
+echoInfo "Want to stay up to date on OnionDAO developments?"
+echoInfo "------------------------------------------------------\n"
+echoInfo "Follow @actuallymentor (mentor.eth) on Twitter at: https://twitter.com/ActuallyMentor"
