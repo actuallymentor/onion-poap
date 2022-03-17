@@ -500,9 +500,11 @@ post_data="$post_data,\"node_nickame\": \"$NODE_NICKNAME\""
 post_data="$post_data,\"wallet\": \"$OPERATOR_WALLET\""
 post_data="$post_data}"
 
-curl -X POST https://oniondao.web.app/node/
-   -H 'Content-Type: application/json'
+curl -X POST https://oniondao.web.app/node/ \
+   -H 'Content-Type: application/json' \
    -d $post_data
+
+echo "Registering with $post_data"
 
 echoInfo "\n------------------------------------------------------"
 echoInfo "Want to stay up to date on OnionDAO developments?"
