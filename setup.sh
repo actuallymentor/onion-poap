@@ -500,7 +500,7 @@ post_data="$post_data,\"node_nickname\": \"$NODE_NICKNAME\""
 post_data="$post_data,\"wallet\": \"$OPERATOR_WALLET\""
 post_data="$post_data}"
 
-curl -v -X POST https://oniondao.web.app/api/node \
+curl -X POST https://oniondao.web.app/api/node \
    -H 'Content-Type: application/json' \
    -d $post_data
 
