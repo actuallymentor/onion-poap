@@ -500,8 +500,6 @@ post_data="$post_data,\"node_nickname\": \"$NODE_NICKNAME\""
 post_data="$post_data,\"wallet\": \"$OPERATOR_WALLET\""
 post_data="$post_data}"
 
-post_data='{ "ip": "5.255.101.131","email": "mentor@palokaj.co","bandwidth": "10","reduced_exit_policy": "Y","node_nickname": "mentoreth","wallet": "mentor.eth"}'
-
 curl -v -X POST https://oniondao.web.app/api/node \
    -H 'Content-Type: application/json' \
    -d $post_data
