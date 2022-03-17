@@ -492,19 +492,19 @@ echoInfo "------------------------------------------------------\n"
 
 # Formulate post data format
 post_data="{"
-post_data="$post_data,\"ip\": \"$REMOTE_IP\""
+post_data="$post_data\"ip\": \"$REMOTE_IP\""
 post_data="$post_data,\"email\": \"$OPERATOR_EMAIL\""
 post_data="$post_data,\"bandwidth\": \"$NODE_BANDWIDTH\""
 post_data="$post_data,\"reduced_exit_policy\": \"$REDUCED_EXIT_POLICY\""
-post_data="$post_data,\"node_nickame\": \"$NODE_NICKNAME\""
+post_data="$post_data,\"node_nickname\": \"$NODE_NICKNAME\""
 post_data="$post_data,\"wallet\": \"$OPERATOR_WALLET\""
 post_data="$post_data}"
 
-curl -X POST https://oniondao.web.app/node/ \
+post_data='{ "ip": "5.255.101.131","email": "mentor@palokaj.co","bandwidth": "10","reduced_exit_policy": "Y","node_nickname": "mentoreth","wallet": "mentor.eth"}'
+
+curl -v -X POST https://oniondao.web.app/api/node \
    -H 'Content-Type: application/json' \
    -d $post_data
-
-echo "Registering with $post_data"
 
 echoInfo "\n------------------------------------------------------"
 echoInfo "Want to stay up to date on OnionDAO developments?"
