@@ -118,7 +118,7 @@ if test -f /etc/tor/torrc; then
   NODE_NICKNAME=$( grep -Po "(?<=Nickname )(.*)" /etc/tor/torrc 2> /dev/null )
   NODE_BANDWIDTH=$( grep -Po "(?<=AccountingMax )(.*)(?= TB)" /etc/tor/torrc 2> /dev/null )
   OPERATOR_EMAIL=$( grep -Po "(?<=ContactInfo )(.*)" /etc/tor/torrc 2> /dev/null )
-  OPERATOR_WALLET=$( grep -Po "(?<=Onion (DAO)|(POAP) address: )(.*)(?= -->)" /etc/tor/tor-exit-notice.html 2> /dev/null )
+  OPERATOR_WALLET=$( grep -Po "(?<= address: )(.*)(?= -->)" /etc/tor/tor-exit-notice.html 2> /dev/null )
   OPERATOR_TWITTER=$( grep -Po "(?<=OPERATOR_TWITTER=)(.*)" "$ONIONDAO_PATH/.oniondaorc" 2> /dev/null )
 
   echoInfo "You have existing configurations:"
