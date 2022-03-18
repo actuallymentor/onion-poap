@@ -1,6 +1,6 @@
-# 🧅 Onion POAP
+# 🧅 OnionDAO Tornode
 
-Onion POAP is an initiative that hands out POAP tokens to people who run a Tor exit node.
+The OnionDAO Tornode initiative hands out POAP tokens to people who run a Tor exit node.
 
 To qualify for your POAP you need to:
 
@@ -16,7 +16,7 @@ You should run your Tor exit node in a data center, probably as a VPS. The requi
 
 1. Any modern CPU
 1. 1.5 GB RAM
-1. 256MB available for Tor
+1. 256MB disk space available for Tor
 
 For details see [the official documentation]( https://community.torproject.org/relay/relays-requirements/ ).
 
