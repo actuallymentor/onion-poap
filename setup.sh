@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Global config
+ONIONDAO_PATH="$HOME"
+
 ## ###############
 ## Force latest version
 ## ###############
@@ -116,11 +119,13 @@ if test -f /etc/tor/torrc; then
   NODE_BANDWIDTH=$( grep -Po "(?<=AccountingMax )(.*)(?= TB)" /etc/tor/torrc 2> /dev/null )
   OPERATOR_EMAIL=$( grep -Po "(?<=ContactInfo )(.*)" /etc/tor/torrc 2> /dev/null )
   OPERATOR_WALLET=$( grep -Po "(?<=Onion (DAO)|(POAP) address: )(.*)(?= -->)" /etc/tor/tor-exit-notice.html 2> /dev/null )
+  OPERATOR_TWITTER=$( grep -Po "(?<=OPERATOR_TWITTER=)(.*)" "$ONIONDAO_PATH/.oniondaorc" 2> /dev/null )
 
   echoInfo "You have existing configurations:"
   echoInfo "POAP wallet: $OPERATOR_WALLET"
   echoInfo "Node nickname: $NODE_NICKNAME"
   echoInfo "Operator email: $OPERATOR_EMAIL"
+  echoInfo "Operator twitter: $OPERATOR_TWITTER"
   echoInfo "Monthly bandwidth limit: $NODE_BANDWIDTH TB\n"
 
   read -p "Keep existing configurations? [Y/n] (default Y): " KEEP_OLD_CONFIGS
@@ -154,6 +159,9 @@ else
 
   echoInfo "\nYour node nickname is visible on the leaderboard at https://tor-relay.co/"
   read -p "Node nickname (requirement for a Tor node, only letters and numbers): " NODE_NICKNAME
+
+  echoInfo "\nYour Twitter handle is OPTIONAL and purely so you can be tweeted at if needed"
+  read -p "Your twitter handle (optional): " OPERATOR_TWITTER
 
   # force node nickname to be only alphanumeric
   NODE_NICKNAME=$( echo $NODE_NICKNAME | tr -cd '[:alnum:]' )
@@ -535,6 +543,11 @@ echoInfo "------------------------------------------------------\n"
 ## Data sanitation
 ## ###############
 
+# Save data that is not in different placed
+if [ ${#OPERATOR_TWITTER} -gt 3 ]; then
+  echo "OPERATOR_TWITTER=$OPERATOR_TWITTER" > $ONIONDAO_PATH/.oniondaorc
+fi
+
 # Check for the (current) edge case that this is a ipv6-only server, assumption: if we could not find an ipv4, you are an ipv6
 if [ ${#REMOTE_IP} -lt 7 ]; then
   echoInfo "Could not find an ipv4 address for your server, using ipv6"
@@ -549,6 +562,11 @@ post_data="$post_data,\"bandwidth\": \"$NODE_BANDWIDTH\""
 post_data="$post_data,\"reduced_exit_policy\": \"$REDUCED_EXIT_POLICY\""
 post_data="$post_data,\"node_nickname\": \"$NODE_NICKNAME\""
 post_data="$post_data,\"wallet\": \"$OPERATOR_WALLET\""
+
+if [ ${#OPERATOR_TWITTER} -gt 3 ]; then
+  post_data="$post_data,\"twitter\": \"$OPERATOR_TWITTER\""
+fi
+
 post_data="$post_data}"
 
 # Register node with Onion DAO oracle
