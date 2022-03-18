@@ -107,9 +107,6 @@ fi
 ## ###############
 ## Get needed data
 ## ###############
-echoInfo "\n\n----------------------------------------"
-echoInfo "Tor setup needs some information"
-echoInfo "----------------------------------------\n\n"
 
 ## ###############
 ## CHeck for old data
@@ -121,7 +118,10 @@ if test -f /etc/tor/torrc; then
   OPERATOR_WALLET=$( grep -Po "(?<= address: )(.*)(?= -->)" /etc/tor/tor-exit-notice.html 2> /dev/null )
   OPERATOR_TWITTER=$( grep -Po "(?<=OPERATOR_TWITTER=)(.*)" "$ONIONDAO_PATH/.oniondaorc" 2> /dev/null )
 
+  echoInfo "\n\n----------------------------------------"
   echoInfo "You have existing configurations:"
+  echoInfo "----------------------------------------\n\n"
+
   echoInfo "POAP wallet: $OPERATOR_WALLET"
   echoInfo "Node nickname: $NODE_NICKNAME"
   echoInfo "Operator email: $OPERATOR_EMAIL"
@@ -139,6 +139,10 @@ fi
 if [[ "$KEEP_OLD_CONFIGS" == "Y" ]]; then
   echoSuccess "Continuing with existing configuration settings"
 else
+
+  echoInfo "\n\n----------------------------------------"
+  echoInfo "Tor setup needs some information"
+  echoInfo "----------------------------------------\n\n"
 
   read -p "How many TB is this node allowed to use per month? (default 1 TB): " NODE_BANDWIDTH
   NODE_BANDWIDTH=${NODE_BANDWIDTH:-"1"}
