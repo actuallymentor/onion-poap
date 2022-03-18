@@ -1,8 +1,9 @@
 #!/bin/bash
 
 # Set and create relevant folders
-oniondaofolder="$HOME/.oniondao/"
+oniondaofolder="$HOME/.oniondao"
 binfolder=/usr/local/sbin
+rm -rf "$oniondaofolder"
 mkdir -p "$oniondaofolder"
 
 # Write battery function as executable
