@@ -12,7 +12,7 @@ version='0.0.1'
 helpmessage="
 OnionDAO CLI utility v$version.
 Authors: @actuallymentor
-Docs: https://github.com/actuallymentor/onion-poap/
+Docs: https://github.com/Onion-DAO/tornode/
 
 Usage: 
 
