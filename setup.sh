@@ -502,7 +502,7 @@ post_data="$post_data}"
 
 curl -X POST https://oniondao.web.app/api/node \
    -H 'Content-Type: application/json' \
-   -d $post_data
+   -d "$post_data"
 
 echoInfo "\n------------------------------------------------------"
 echoInfo "Want to stay up to date on OnionDAO developments?"
