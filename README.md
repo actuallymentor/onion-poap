@@ -25,7 +25,7 @@ For details see [the official documentation]( https://community.torproject.org/r
 Are you in a rush?
 
 1. Buy a VPS with 1.5GB ram
-2. Run `git clone https://github.com/actuallymentor/onion-poap.git && cd onion-poap && sudo bash setup.sh`
+2. Run `curl https://raw.githubusercontent.com/actuallymentor/onion-poap/main/setup.sh --output oniondao.setup.sh && sudo bash oniondao.setup.sh && rm oniondao.setup.sh`
 3. Follow on screen instructions
 4. Tweet your node IP to `@actuallymentor` (mentor.eth)
 
@@ -51,10 +51,6 @@ cd onion-poap
 sudo bash setup.sh
 ```
 
-### Step 3: Tweet your node IP to @actuallymentor
-
-The final step in the setup script will send you a recommended message.
-
-### Step 4: keep it running for a month
+### Step 3: keep it running for a month
 
 After a month, the POAPs will de distributed through poap.delivery.

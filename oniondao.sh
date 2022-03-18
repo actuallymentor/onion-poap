@@ -16,27 +16,26 @@ Docs: https://github.com/actuallymentor/onion-poap/
 
 Usage: 
 
-	oniondao help
+  oniondao help
     output (this) oniondao help message
 
   oniondao version
     output the OnionDAO cli version
 
   oniondao status
-  	output your current configuration
+    output your current configuration
 
-	oniondao install
-   	set up and register a Tor exit node and notify the OnionDAO oracle
+  oniondao install
+    set up and register a Tor exit node and notify the OnionDAO oracle
 
-	oniondao update
-   	update your OnionDAO node to the lasest CLI and configuration
+  oniondao update
+    update your OnionDAO node to the lasest CLI and configuration
 
 
 "
 
 # Get parameters
 action=$1
-setting=$2
 
 ## ###############
 ## Helpers
@@ -55,6 +54,11 @@ function log() {
 
 # Help message 
 if [ -z "$action" ]; then
+	echo -e "$helpmessage"
+	exit 0
+fi
+
+if [[ "$action" == "help" ]]; then
 	echo -e "$helpmessage"
 	exit 0
 fi
@@ -78,15 +82,14 @@ if [[ "$action" == "status" ]]; then
   NODE_BANDWIDTH=$( grep -Po "(?<=AccountingMax )(.*)(?= TB)" /etc/tor/torrc 2> /dev/null )
   OPERATOR_EMAIL=$( grep -Po "(?<=ContactInfo )(.*)" /etc/tor/torrc 2> /dev/null )
   OPERATOR_WALLET=$( grep -Po "(?<= address: )(.*)(?= -->)" /etc/tor/tor-exit-notice.html 2> /dev/null )
-  OPERATOR_TWITTER=$( grep -Po "(?<=OPERATOR_TWITTER=)(.*)" "$ONIONDAO_PATH/.oniondaorc" 2> /dev/null )
+  OPERATOR_TWITTER=$( grep -Po "(?<=OPERATOR_TWITTER=)(.*)" "$oniondaofolder/.oniondaorc" 2> /dev/null )
 
   echo "POAP wallet: $OPERATOR_WALLET"
   echo "Node nickname: $NODE_NICKNAME"
   echo "Operator email: $OPERATOR_EMAIL"
   echo "Operator twitter: $OPERATOR_TWITTER"
-  echo "Monthly bandwidth limit: $NODE_BANDWIDTH TB\n"
+  echo "Monthly bandwidth limit: $NODE_BANDWIDTH TB"
 
-	sudo bash "$oniondaofolder/install-tornode.sh"
 	exit 0
 fi
 
