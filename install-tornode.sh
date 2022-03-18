@@ -118,6 +118,7 @@ if test -f /etc/tor/torrc; then
   OPERATOR_EMAIL=$( grep -Po "(?<=ContactInfo )(.*)" /etc/tor/torrc 2> /dev/null )
   OPERATOR_WALLET=$( grep -Po "(?<= address: )(.*)(?= -->)" /etc/tor/tor-exit-notice.html 2> /dev/null )
   OPERATOR_TWITTER=$( grep -Po "(?<=OPERATOR_TWITTER=)(.*)" "$ONIONDAO_PATH/.oniondaorc" 2> /dev/null )
+  REDUCED_EXIT_POLICY=$( grep -Po "(?<=REDUCED_EXIT_POLICY=)(.*)" "$ONIONDAO_PATH/.oniondaorc" 2> /dev/null )
 
   echoInfo "\n\n----------------------------------------"
   echoInfo "You have existing configurations:"
@@ -139,6 +140,7 @@ fi
 ## ###############
 if [[ "$KEEP_OLD_CONFIGS" == "Y" ]]; then
   echoSuccess "Continuing with existing configuration settings"
+  REDUCED_EXIT_POLICY=${REDUCED_EXIT_POLICY:-"Y"}
 else
 
   echoInfo "\n\n----------------------------------------"
@@ -549,10 +551,9 @@ echoInfo "------------------------------------------------------\n"
 ## Data sanitation
 ## ###############
 
-# Save data that is not in different placed
-if [ ${#OPERATOR_TWITTER} -gt 3 ]; then
-  echo "OPERATOR_TWITTER=$OPERATOR_TWITTER" > $ONIONDAO_PATH/.oniondaorc
-fi
+# Save data that is not in different places
+echo "OPERATOR_TWITTER=$OPERATOR_TWITTER" > $ONIONDAO_PATH/.oniondaorc
+echo "REDUCED_EXIT_POLICY=$REDUCED_EXIT_POLICY" >> $ONIONDAO_PATH/.oniondaorc
 
 # Check for the (current) edge case that this is a ipv6-only server, assumption: if we could not find an ipv4, you are an ipv6
 if [ ${#REMOTE_IP} -lt 7 ]; then
@@ -583,4 +584,4 @@ curl -X POST https://oniondao.web.app/api/node \
 echoInfo "\n------------------------------------------------------"
 echoInfo "Want to stay up to date on OnionDAO developments?"
 echoInfo "------------------------------------------------------\n"
-echoInfo "Follow @actuallymentor (mentor.eth) on Twitter at: https://twitter.com/ActuallyMentor"
+echoInfo "Follow @actuallymentor (mentor.eth) on Twitter at: https://twitter.com/ActuallyMentor\n"
