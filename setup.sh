@@ -21,7 +21,7 @@ __   __ _  __  __   __ _    ____   __    __   ____
 
 ==========================================================
 
-Onion POAP is an initiative that hands out POAP tokens to people who run a Tor exit node.
+Onion POAP is an Onion DAO initiative that hands out POAP tokens to people who run a Tor exit node.
 
 This is a setup script that will install a Tor exit node & register that node with Tor POAP.
 
@@ -108,56 +108,98 @@ echoInfo "\n\n----------------------------------------"
 echoInfo "Tor setup needs some information"
 echoInfo "----------------------------------------\n\n"
 
-read -p "How many TB is this node allowed to use per month? (default 1 TB): " NODE_BANDWIDTH
-NODE_BANDWIDTH=${NODE_BANDWIDTH:-"1"}
+## ###############
+## CHeck for old data
+## ###############
+if test -f /etc/tor/torrc; then
+  NODE_NICKNAME=$( grep -Po "(?<=Nickname )(.*)" /etc/tor/torrc 2> /dev/null )
+  NODE_BANDWIDTH=$( grep -Po "(?<=AccountingMax )(.*)(?= TB)" /etc/tor/torrc 2> /dev/null )
+  OPERATOR_EMAIL=$( grep -Po "(?<=ContactInfo )(.*)" /etc/tor/torrc 2> /dev/null )
+  OPERATOR_WALLET=$( grep -Po "(?<=Onion (DAO)|(POAP) address: )(.*)(?= -->)" /etc/tor/tor-exit-notice.html 2> /dev/null )
 
-echo -e "\nThere are 2 available exit policies in this script: ReducedExitPolicy and WebOnly."
-echo "ReducedExitPolicy: blocks most abuse ports (like Torrents, Email, etc)"
-echo -e "WebOnly: allows for only http(s) traffic, which is only partially useful to the Network\n"
-read -p "Do you want to ReducedExitPolicy? [Y/n] (default Y): " REDUCED_EXIT_POLICY
-REDUCED_EXIT_POLICY=${REDUCED_EXIT_POLICY:-"Y"}
+  echoInfo "You have existing configurations:"
+  echoInfo "POAP wallet: $OPERATOR_WALLET"
+  echoInfo "Node nickname: $NODE_NICKNAME"
+  echoInfo "Operator email: $OPERATOR_EMAIL"
+  echoInfo "Monthly bandwidth limit: $NODE_BANDWIDTH TB\n"
 
-echoInfo "\n\n----------------------------------------"
-echoInfo "Onion POAP needs some information"
-echoInfo "----------------------------------------\n\n"
+  read -p "Keep existing configurations? [Y/n] (default Y): " KEEP_OLD_CONFIGS
+  KEEP_OLD_CONFIGS=${KEEP_OLD_CONFIGS:-"Y"}
 
-echoError "Note: Tor needs a valid email address so you can be contacted if there is an issue."
-echoInfo "This address is public, you may want to use a dedicated email account for this, or if you use gmail use the + operator like so: yourname+tor@gmail.com. Read more about task-specific addresses here: https://support.google.com/a/users/answer/9308648?hl=en\n"
-read -p "Your email (requirement for a Tor node): " OPERATOR_EMAIL
+fi
 
-echoInfo "\nYour node nickname is visible on the leaderboard at https://tor-relay.co/"
-read -p "Node nickname (requirement for a Tor node, only letters and numbers): " NODE_NICKNAME
+## ###############
+## Get new data
+## ###############
+if [[ "$KEEP_OLD_CONFIGS" == "Y" ]]; then
+  echoSuccess "Continuing with existing configuration settings"
+else
 
-# force node nickname to be only alphanumeric
-NODE_NICKNAME=$( echo $NODE_NICKNAME | tr -cd '[:alnum:]' )
+  read -p "How many TB is this node allowed to use per month? (default 1 TB): " NODE_BANDWIDTH
+  NODE_BANDWIDTH=${NODE_BANDWIDTH:-"1"}
 
-read -p "Your wallet address or ENS (to receive POAP): " OPERATOR_WALLET
+  echo -e "\nThere are 2 available exit policies in this script: ReducedExitPolicy and WebOnly."
+  echo "ReducedExitPolicy: blocks most abuse ports (like Torrents, Email, etc)"
+  echo -e "WebOnly: allows for only http(s) traffic, which is only partially useful to the Network\n"
+  read -p "Do you want to ReducedExitPolicy? [Y/n] (default Y): " REDUCED_EXIT_POLICY
+  REDUCED_EXIT_POLICY=${REDUCED_EXIT_POLICY:-"Y"}
 
-echoSuccess "\n\n----------------------------------------"
-echoSuccess "Check your information"
-echoSuccess "----------------------------------------"
-echoSuccess "POAP wallet: $OPERATOR_WALLET"
-echoSuccess "Node nickname: $NODE_NICKNAME"
-echoSuccess "Operator email: $OPERATOR_EMAIL"
-echoSuccess "Monthly bandwidth limit: $NODE_BANDWIDTH TB\n"
-echoInfo "Press any key to continue or ctrl+c to exit..."
-read
+  echoInfo "\n\n----------------------------------------"
+  echoInfo "Onion POAP needs some information"
+  echoInfo "----------------------------------------\n\n"
+
+  echoError "Note: Tor needs a valid email address so you can be contacted if there is an issue."
+  echoInfo "This address is public, you may want to use a dedicated email account for this, or if you use gmail use the + operator like so: yourname+tor@gmail.com. Read more about task-specific addresses here: https://support.google.com/a/users/answer/9308648?hl=en\n"
+  read -p "Your email (requirement for a Tor node): " OPERATOR_EMAIL
+
+  echoInfo "\nYour node nickname is visible on the leaderboard at https://tor-relay.co/"
+  read -p "Node nickname (requirement for a Tor node, only letters and numbers): " NODE_NICKNAME
+
+  # force node nickname to be only alphanumeric
+  NODE_NICKNAME=$( echo $NODE_NICKNAME | tr -cd '[:alnum:]' )
+
+  read -p "Your wallet address or ENS (to receive POAP): " OPERATOR_WALLET
+
+  echoSuccess "\n\n----------------------------------------"
+  echoSuccess "Check your information"
+  echoSuccess "----------------------------------------"
+  echoSuccess "POAP wallet: $OPERATOR_WALLET"
+  echoSuccess "Node nickname: $NODE_NICKNAME"
+  echoSuccess "Operator email: $OPERATOR_EMAIL"
+  echoSuccess "Monthly bandwidth limit: $NODE_BANDWIDTH TB\n"
+  echoInfo "Press any key to continue or ctrl+c to exit..."
+  read
+
+fi
 
 
-echo -e $C_CYAN #cyan
-cat << "EOF"
+# 🔥 removed logo to prevent confusion, are you from tor-relay and reading this? I'm happy to add attribution in any way you like, contact me on Twitter :)
+# echo -e $C_CYAN #cyan
+# cat << "EOF"
 
- _____            ___     _
-|_   _|__ _ _ ___| _ \___| |__ _ _  _   __ ___
-  | |/ _ \ '_|___|   / -_) / _` | || |_/ _/ _ \
-  |_|\___/_|     |_|_\___|_\__,_|\_, (_)__\___/
-                                 |__/
+#  _____            ___     _
+# |_   _|__ _ _ ___| _ \___| |__ _ _  _   __ ___
+#   | |/ _ \ '_|___|   / -_) / _` | || |_/ _/ _ \
+#   |_|\___/_|     |_|_\___|_\__,_|\_, (_)__\___/
+#                                  |__/
 
-EOF
+# EOF
 
+## ###############
+## Get remote IP
+## ###############
+
+# Get ipv4 of this server
 REMOTE_IP=$( curl ipv4.icanhazip.com 2> /dev/null )
 if [ ${#REMOTE_IP} -lt 7 ]; then
+  echo "Remote ip: icanhaz unavailable, using canhaz"
   REMOTE_IP=$( curl ipv4.canhazip.com 2> /dev/null )
+elif [ ${#REMOTE_IP} -lt 7 ]; then
+  echo "Remote ip: canhaz unavailable, using ipify"
+  REMOTE_IP=$( curl api.ipify.org 2> /dev/null )
+elif [ ${#REMOTE_IP} -lt 7 ]; then
+  echo "Remote ip: ipify unavailable, using seeip"
+  REMOTE_IP=$( curl https://ip4.seeip.org 2> /dev/null )
 fi
 
 echo -e $C_DEFAULT #default
@@ -366,7 +408,7 @@ then
   sed -i "s/FIXME_DNS_NAME/$REMOTE_IP/g" /etc/tor/tor-exit-notice.html
 
   # 🔥 added a comment to the tor notice page with the POAP address so I can scrape it for distribution
-  echo "<!-- Onion POAP address: $OPERATOR_WALLET -->" >> /etc/tor/tor-exit-notice.html
+  echo "<!-- Onion DAO address: $OPERATOR_WALLET -->" >> /etc/tor/tor-exit-notice.html
 
 fi
 
@@ -485,10 +527,19 @@ If you see no errors above, setup is complete. If you haven't already, it is hig
 EOF
 
 
-
 echoInfo "------------------------------------------------------"
 echoInfo "Registering node with OnionDAO..."
 echoInfo "------------------------------------------------------\n"
+
+## ###############
+## Data sanitation
+## ###############
+
+# Check for the (current) edge case that this is a ipv6-only server, assumption: if we could not find an ipv4, you are an ipv6
+if [ ${#REMOTE_IP} -lt 7 ]; then
+  echoInfo "Could not find an ipv4 address for your server, using ipv6"
+  REMOTE_IP="$IPV6_ADDRESS"
+fi
 
 # Formulate post data format
 post_data="{"
@@ -500,6 +551,7 @@ post_data="$post_data,\"node_nickname\": \"$NODE_NICKNAME\""
 post_data="$post_data,\"wallet\": \"$OPERATOR_WALLET\""
 post_data="$post_data}"
 
+# Register node with Onion DAO oracle
 curl -X POST https://oniondao.web.app/api/node \
    -H 'Content-Type: application/json' \
    -d "$post_data"
