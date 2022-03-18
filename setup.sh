@@ -174,6 +174,7 @@ else
   echoSuccess "POAP wallet: $OPERATOR_WALLET"
   echoSuccess "Node nickname: $NODE_NICKNAME"
   echoSuccess "Operator email: $OPERATOR_EMAIL"
+  echoSuccess "Operator twitter: $OPERATOR_TWITTER"
   echoSuccess "Monthly bandwidth limit: $NODE_BANDWIDTH TB\n"
   echoInfo "Press any key to continue or ctrl+c to exit..."
   read
