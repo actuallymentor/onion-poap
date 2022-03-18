@@ -500,6 +500,14 @@ sleep 10
 echo "Finishing up setup..."
 sleep 10
 
+if curl "http://127.0.0.1" &> /dev/null; then
+  echo "Tor is serving exit notice, continuing"
+else
+  echo "Tor setup is taking longer than expected, this may take a minute or two"
+  echo "Do not exit this script, it is still running :)"
+  sleep 60
+fi
+
 echo ""
 echoSuccess "=> Setup finished"
 echo ""
