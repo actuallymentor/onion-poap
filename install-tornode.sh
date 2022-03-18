@@ -128,7 +128,8 @@ if test -f /etc/tor/torrc; then
   echoInfo "Node nickname: $NODE_NICKNAME"
   echoInfo "Operator email: $OPERATOR_EMAIL"
   echoInfo "Operator twitter: $OPERATOR_TWITTER"
-  echoInfo "Monthly bandwidth limit: $NODE_BANDWIDTH TB\n"
+  echoInfo "Monthly bandwidth limit: $NODE_BANDWIDTH TB"
+  echoInfo "Reduced exit policy: $REDUCED_EXIT_POLICY\n"
 
   read -p "Keep existing configurations? [Y/n] (default Y): " KEEP_OLD_CONFIGS
   KEEP_OLD_CONFIGS=${KEEP_OLD_CONFIGS:-"Y"}
