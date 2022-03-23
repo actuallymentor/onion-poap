@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Global config
+BIN_FOLDER=/usr/local/sbin
 ONIONDAO_PATH="$HOME/.oniondao/"
 
 ## ###############
@@ -8,6 +9,9 @@ ONIONDAO_PATH="$HOME/.oniondao/"
 ## ###############
 cd "$ONIONDAO_PATH"
 git pull &> /dev/null
+sudo cp $ONIONDAO_PATH/oniondao.sh $BIN_FOLDER/oniondao
+sudo chmod 755 $BIN_FOLDER/oniondao
+sudo chmod u+x $BIN_FOLDER/oniondao
 
 ## ###############
 ## Tor POAP config
