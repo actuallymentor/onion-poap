@@ -108,3 +108,26 @@ if [[ "$action" == "update" ]]; then
 	sudo bash "./install-tornode.sh"
 	exit 0
 fi
+
+if [[ "$action" == "debug" ]]; then
+	
+	log "\nSystem data:"
+	cat /etc/os-release
+
+	log "\nOniondao status:"
+	oniondao status
+
+	log "\nTor status:"
+	service tor status
+
+	log "\nTor binary:"
+	which tor
+
+	log "\nPorts in use:"
+	sudo netstat -lp
+
+	log "\nTor config:"
+	cat /etc/tor/torrc
+
+	exit 0
+fi
