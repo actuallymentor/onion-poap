@@ -495,22 +495,18 @@ sleep 10
 echoInfo "Reloading Tor config..."
 sudo /etc/init.d/tor restart
 
-# 🔥 wait for 30 seconds so things can start up 
+# 🔥 wait for tor to come online 
 # keep the user entertained with status updates
 echo "Waiting for Tor to come online, just a moment..."
-sleep 10
-echo "Epibrating service files..."
-sleep 10
-echo "Finishing up setup..."
-sleep 10
+echo "This can take a few minutes. DO NOT EXIT THIS SCRIPT."
 
-if curl "http://127.0.0.1" &> /dev/null; then
-  echo "Tor is serving exit notice, continuing"
-else
-  echo "Tor setup is taking longer than expected, this may take a minute or two"
-  echo "Do not exit this script, it is still running :)"
-  sleep 60
-fi
+PROGRESS="#"
+until curl "http://127.0.0.1" &> /dev/null; do
+  echo -en "\e[K$PROGRESS"
+  RANDOM_BETWEEN_1_AND_5=$(( ( RANDOM % 5 )  + 1 ))
+  PROGRESS="$PROGRESS#"
+  sleep "$RANDOM_BETWEEN_1_AND_5"
+done
 
 echo ""
 echoSuccess "=> Setup finished"
