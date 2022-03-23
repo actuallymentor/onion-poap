@@ -113,6 +113,8 @@ if [[ "$action" == "debug" ]]; then
 	
 	log "\nSystem data:"
 	cat /etc/os-release
+	free -m
+	cat /proc/cpuinfo
 
 	log "\nOniondao status:"
 	oniondao status
