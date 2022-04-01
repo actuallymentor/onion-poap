@@ -110,33 +110,8 @@ echoInfo "\n\n----------------------------------------"
 echoInfo "OnionDAO needs some information"
 echoInfo "----------------------------------------\n\n"
 
-# Node nickname
-if [ "$NODE_NICKNAME" ]; then
+echoError "\nNOTE: details such as Node nickname, operator email etc are obtained from /etc/tor/torrc, you may edit them there.\n\n"
 
-  read -p "Keep $NODE_NICKNAME as your node nickname? [Y/n] " KEEP_NODE_NICKNAME
-  if [ "${KEEP_NODE_NICKNAME,,}" = "n" ]; then
-    read -p "Node nickname (requirement for a Tor node, only letters and numbers): " NODE_NICKNAME
-  fi
-
-else
-
-  read -p "Node nickname (requirement for a Tor node, only letters and numbers): " NODE_NICKNAME
-  
-fi
-
-# Operator email
-if [ "$OPERATOR_EMAIL" ]; then
-
-  read -p "Keep $OPERATOR_EMAIL as your node email? [Y/n] " KEEP_OPERATOR_EMAIL
-  if [ "${KEEP_OPERATOR_EMAIL,,}" = "n" ]; then
-    read -p "Your email: " OPERATOR_EMAIL
-  fi
-
-else
-
-  read -p "Your email: " OPERATOR_EMAIL
-  
-fi
 
 # Operator email
 if [ "$OPERATOR_WALLET" ]; then
@@ -168,6 +143,7 @@ fi
 
 # Mark unknown values
 NODE_BANDWIDTH=${NODE_BANDWIDTH:-"unknown"}
+NODE_NICKNAME=${NODE_NICKNAME:-"unknown"}
 REDUCED_EXIT_POLICY=${REDUCED_EXIT_POLICY:-"unknown"}
 
 echoSuccess "\n\n----------------------------------------"
@@ -242,4 +218,4 @@ curl -X POST https://oniondao.web.app/api/tor_nodes \
 echoInfo "\n------------------------------------------------------"
 echoInfo "Want to stay up to date on OnionDAO developments?"
 echoInfo "------------------------------------------------------\n"
-echoInfo "Follow @actuallymentor (mentor.eth) on Twitter at: https://twitter.com/ActuallyMentor\n"
+echoInfo "👉 Join us in the Rocketeer discord in the #onion-dao channel: https://discord.gg/rocketeers\n"
