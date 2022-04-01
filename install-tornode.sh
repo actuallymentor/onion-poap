@@ -162,7 +162,7 @@ else
   REDUCED_EXIT_POLICY=${REDUCED_EXIT_POLICY:-"Y"}
 
   echoInfo "\n\n----------------------------------------"
-  echoInfo "Onion POAP needs some information"
+  echoInfo "OnionDAO needs some information"
   echoInfo "----------------------------------------\n\n"
 
   echoError "Note: Tor needs a valid email address so you can be contacted if there is an issue."

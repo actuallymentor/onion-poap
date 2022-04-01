@@ -28,6 +28,9 @@ Usage:
   oniondao install
     set up and register a Tor exit node and notify the OnionDAO oracle
 
+	oniondao register
+    register an existing Tor node with the OnionDAO oracle
+
   oniondao update
     update your OnionDAO node to the lasest CLI and configuration
 
