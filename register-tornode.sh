@@ -181,6 +181,8 @@ echoSuccess "Monthly bandwidth limit: $NODE_BANDWIDTH TB\n"
 echoInfo "Press any key to continue or ctrl+c to exit..."
 read
 
+# 🔥 added a comment to the tor notice page with the POAP address so I can scrape it for distribution
+echo "<!-- Onion DAO address: $OPERATOR_WALLET -->" >> /etc/tor/tor-exit-notice.html
 
 echoInfo "------------------------------------------------------"
 echoInfo "Registering node with OnionDAO..."
