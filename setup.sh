@@ -20,7 +20,7 @@ echo -e "\n🎉 OnionDAO installed. Type \"oniondao\" for CLI options."
 read -p "Do you want to install Tor on this machine and register it with the OnionDAO Oracle? [Y/n]" INSTALL_TOR
 INSTALL_TOR=${INSTALL_TOR:-"y"}
 
-if [ "${INSTALL_TOR},," = "y" ]; then
+if [ "${INSTALL_TOR,,}" = "y" ]; then
 	# Run installation of OnionDAO node
 	sudo bash "$oniondaofolder/install-tornode.sh"
 else
