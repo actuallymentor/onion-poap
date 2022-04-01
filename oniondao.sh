@@ -112,6 +112,14 @@ if [[ "$action" == "update" ]]; then
 	exit 0
 fi
 
+# Update script trigger
+if [[ "$action" == "register" ]]; then
+	cd "$oniondaofolder"
+	git pull &> /dev/null
+	sudo bash "./register-tornode.sh"
+	exit 0
+fi
+
 if [[ "$action" == "debug" ]]; then
 	
 	log "\nSystem data:"
