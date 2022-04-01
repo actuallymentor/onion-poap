@@ -110,7 +110,7 @@ echoInfo "\n\n----------------------------------------"
 echoInfo "OnionDAO needs some information"
 echoInfo "----------------------------------------\n\n"
 
-echoError "\nNOTE: details such as Node nickname, operator email etc are obtained from /etc/tor/torrc, you may edit them there.\n\n"
+echoError "NOTE: details such as Node nickname, operator email etc are obtained from /etc/tor/torrc, you may edit them there."
 
 
 # Operator email
@@ -235,7 +235,7 @@ curl -X POST https://oniondao.web.app/api/tor_nodes \
    -H 'Content-Type: application/json' \
    -d "$post_data"
 
-echoInfo "\n------------------------------------------------------"
+echoInfo "\n\n------------------------------------------------------"
 echoInfo "Want to stay up to date on OnionDAO developments?"
 echoInfo "------------------------------------------------------\n"
 echoInfo "👉 Join us in the Rocketeer discord in the #onion-dao channel: https://discord.gg/rocketeers\n"

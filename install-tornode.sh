@@ -590,7 +590,7 @@ curl -X POST https://oniondao.web.app/api/tor_nodes \
    -H 'Content-Type: application/json' \
    -d "$post_data"
 
-echoInfo "\n------------------------------------------------------"
+echoInfo "\n\n------------------------------------------------------"
 echoInfo "Want to stay up to date on OnionDAO developments?"
 echoInfo "------------------------------------------------------\n"
 echoInfo "👉 Join us in the Rocketeer discord in the #onion-dao channel: https://discord.gg/rocketeers\n"
