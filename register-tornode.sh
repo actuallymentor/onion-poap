@@ -119,6 +119,27 @@ if [ "$OPERATOR_WALLET" ]; then
   read -p "Keep $OPERATOR_WALLET as your node wallet to receive POAPs? [Y/n] " KEEP_OPERATOR_WALLET
   if [ "${KEEP_OPERATOR_WALLET,,}" = "n" ]; then
     read -p "Your wallet address or ENS (to receive POAP): " OPERATOR_WALLET
+
+    # Remove old address and add new one
+    sed -i 's/<!-- Onion.*$//g' /etc/tor/tor-exit-notice.html
+    echo "<!-- Onion DAO address: $OPERATOR_WALLET -->" >> /etc/tor/tor-exit-notice.html
+
+    echoInfo "Reloading Tor config..."
+    sudo /etc/init.d/tor restart
+
+    # 🔥 wait for tor to come online 
+    # keep the user entertained with status updates
+    echo "Waiting for Tor to come online, just a moment..."
+    echo "This can take a few minutes. DO NOT EXIT THIS SCRIPT."
+
+    PROGRESS="#"
+    until curl "http://127.0.0.1" &> /dev/null; do
+      echo -en "\e[K$PROGRESS"
+      RANDOM_BETWEEN_1_AND_5=$(( ( RANDOM % 5 )  + 1 ))
+      PROGRESS="$PROGRESS#"
+      sleep "$RANDOM_BETWEEN_1_AND_5"
+    done
+
   fi
 
 else
@@ -157,8 +178,7 @@ echoSuccess "Monthly bandwidth limit: $NODE_BANDWIDTH TB\n"
 echoInfo "Press any key to continue or ctrl+c to exit..."
 read
 
-# 🔥 added a comment to the tor notice page with the POAP address so I can scrape it for distribution
-echo "<!-- Onion DAO address: $OPERATOR_WALLET -->" >> /etc/tor/tor-exit-notice.html
+
 
 echoInfo "------------------------------------------------------"
 echoInfo "Registering node with OnionDAO..."

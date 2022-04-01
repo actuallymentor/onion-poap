@@ -429,7 +429,7 @@ then
   sed -i "s/FIXME_DNS_NAME/$REMOTE_IP/g" /etc/tor/tor-exit-notice.html
 
   # 🔥 added a comment to the tor notice page with the POAP address so I can scrape it for distribution
-  echo "<!-- Onion DAO address: $OPERATOR_WALLET -->" >> /etc/tor/tor-exit-notice.html
+  echo "<!-- OnionDAO address: $OPERATOR_WALLET -->" >> /etc/tor/tor-exit-notice.html
 
 fi
 
