@@ -114,7 +114,7 @@ echoInfo "----------------------------------------\n\n"
 if [ "$NODE_NICKNAME" ]; then
 
   read -p "Keep $NODE_NICKNAME as your node nickname? [Y/n] " KEEP_NODE_NICKNAME
-  if [ "${KEEP_NODE_NICKNAME},," = "n" ];
+  if [ "${KEEP_NODE_NICKNAME},," = "n" ]; then
     read -p "Node nickname (requirement for a Tor node, only letters and numbers): " NODE_NICKNAME
   fi
 
@@ -128,7 +128,7 @@ fi
 if [ "$OPERATOR_EMAIL" ]; then
 
   read -p "Keep $OPERATOR_EMAIL as your node nickname? [Y/n] " KEEP_OPERATOR_EMAIL
-  if [ "${KEEP_OPERATOR_EMAIL},," = "n" ];
+  if [ "${KEEP_OPERATOR_EMAIL},," = "n" ]; then
     read -p "Your email: " OPERATOR_EMAIL
   fi
 
@@ -142,7 +142,7 @@ fi
 if [ "$OPERATOR_WALLET" ]; then
 
   read -p "Keep $OPERATOR_WALLET as your node nickname? [Y/n] " KEEP_OPERATOR_WALLET
-  if [ "${KEEP_OPERATOR_WALLET},," = "n" ];
+  if [ "${KEEP_OPERATOR_WALLET},," = "n" ]; then
     read -p "Your wallet address or ENS (to receive POAP): " OPERATOR_WALLET
   fi
 
@@ -156,7 +156,7 @@ fi
 if [ "$OPERATOR_TWITTER" ]; then
 
   read -p "Keep $OPERATOR_TWITTER as your node nickname? [Y/n] " KEEP_OPERATOR_TWITTER
-  if [ "${KEEP_OPERATOR_TWITTER},," = "n" ];
+  if [ "${KEEP_OPERATOR_TWITTER},," = "n" ]; then
     read -p "Your wallet address or ENS (to receive POAP): " OPERATOR_TWITTER
   fi
 
