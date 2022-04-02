@@ -528,11 +528,6 @@ echo ""
 #   echo "If you chose to install nyx you can check nyx to see if Tor is running."
 # fi
 
-# 🔥 add the current user to the tor user group so that we can run Nyx without sudo
-# this is a known Nyx annoyance, see https://github.com/torproject/nyx/issues/24
-sudo adduser $USER debian-tor
-exec sudo su -l $USER # make sure relogin is not needed, see https://superuser.com/a/609141
-
 cat << "EOF"
 
 ===========================================
@@ -599,3 +594,8 @@ echoInfo "\n\n------------------------------------------------------"
 echoInfo "Want to stay up to date on OnionDAO developments?"
 echoInfo "------------------------------------------------------\n"
 echoInfo "👉 Join us in the Rocketeer discord in the #onion-dao channel: https://discord.gg/rocketeers\n"
+
+# 🔥 add the current user to the tor user group so that we can run Nyx without sudo
+# this is a known Nyx annoyance, see https://github.com/torproject/nyx/issues/24
+sudo adduser $USER debian-tor
+exec sudo su -l $USER # make sure relogin is not needed, see https://superuser.com/a/609141
