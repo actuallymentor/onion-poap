@@ -1,8 +1,11 @@
 #!/bin/bash
 
+PARENT_HOME=$1
+PARENT_HOME=${PARENT_HOME:-$HOME}
+
 # Global config
 BIN_FOLDER=/usr/local/sbin
-ONIONDAO_PATH="$HOME/.oniondao/"
+ONIONDAO_PATH="$PARENT_HOME/.oniondao/"
 
 ## ###############
 ## Force latest version

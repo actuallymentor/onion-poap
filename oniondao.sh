@@ -100,7 +100,7 @@ fi
 if [[ "$action" == "install" ]]; then
 	cd "$oniondaofolder"
 	git pull &> /dev/null
-	sudo bash "./install-tornode.sh"
+	sudo bash "./install-tornode.sh" "$HOME"
 	exit 0
 fi
 
@@ -108,7 +108,7 @@ fi
 if [[ "$action" == "update" ]]; then
 	cd "$oniondaofolder"
 	git pull &> /dev/null
-	sudo bash "./install-tornode.sh"
+	sudo bash "./install-tornode.sh" "$HOME"
 	exit 0
 fi
 
@@ -116,7 +116,7 @@ fi
 if [[ "$action" == "register" ]]; then
 	cd "$oniondaofolder"
 	git pull &> /dev/null
-	sudo bash "./register-tornode.sh"
+	sudo bash "./register-tornode.sh" "$HOME"
 	exit 0
 fi
 
