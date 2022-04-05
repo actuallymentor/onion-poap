@@ -25,7 +25,7 @@ For details see [the official documentation]( https://community.torproject.org/r
 Are you in a rush?
 
 1. Buy a VPS with 1.5GB ram
-2. Run `curl https://raw.githubusercontent.com/Onion-DAO/tornode/main/setup.sh --output oniondao.setup.sh && sudo bash oniondao.setup.sh && rm oniondao.setup.sh`
+2. Run `curl https://raw.githubusercontent.com/Onion-DAO/tornode/main/setup.sh --output oniondao.setup.sh && sudo bash oniondao.setup.sh $HOME && rm oniondao.setup.sh`
 
 ## Setup (the long version)
 

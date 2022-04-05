@@ -1,5 +1,8 @@
 #!/bin/bash
 
+PARENT_HOME=$1
+PARENT_HOME=${PARENT_HOME:-$HOME}
+
 # Set and create relevant folders
 oniondaofolder="$HOME/.oniondao"
 binfolder=/usr/local/sbin
