@@ -23,8 +23,6 @@ Are you in a rush?
 
 # Text instructions
 
-## Requirements
-
 You should run your Tor exit node in a data center, probably as a VPS. The requires specs are:
 
 1. Any modern CPU
@@ -33,7 +31,7 @@ You should run your Tor exit node in a data center, probably as a VPS. The requi
 
 For details see [the official documentation]( https://community.torproject.org/relay/relays-requirements/ ).
 
-## Setup (the long version)
+## Setup steps
 
 In order to qualify for an Onion POAP, you need to run a Tor exit node. Ideally, you do so at a datacenter. We're going to assume you are using a VPS (virtual private server) with Ubuntu `20.04 LTS`.
 
