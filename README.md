@@ -1,6 +1,6 @@
 # 🧅 OnionDAO Tornode
 
-The OnionDAO Tornode initiative hands out POAP tokens to people who run a Tor exit node.
+This is an initiative by the [OnionDAO]( https://oniondao.web.app/).
 
 To qualify for your POAP you need to:
 
@@ -8,7 +8,20 @@ To qualify for your POAP you need to:
 1. Keep your node running for at least one month
 1. Claim your POAP at poap.delivery
 
-⚠️ If you do not know what the following words mean, we recommend you do not continue: `shell`, `VPS`, `Tor`.
+---
+
+
+## Setup TL;DR
+
+Are you in a rush?
+
+1. Buy a VPS with 1.5GB ram ([crowdsourced list of suitable providers here](https://docs.google.com/spreadsheets/d/1ztkonpfs0u3NP1HA-V6rhE6eK77W6y0Q8gG_yv9tI3s))
+2. Run `curl https://raw.githubusercontent.com/Onion-DAO/tornode/main/setup.sh --output oniondao.setup.sh && sudo bash oniondao.setup.sh $HOME && rm oniondao.setup.sh`
+3. Follow on-screen instructions
+
+---
+
+# Text instructions
 
 ## Requirements
 
@@ -20,20 +33,17 @@ You should run your Tor exit node in a data center, probably as a VPS. The requi
 
 For details see [the official documentation]( https://community.torproject.org/relay/relays-requirements/ ).
 
-## Setup TL;DR
-
-Are you in a rush?
-
-1. Buy a VPS with 1.5GB ram
-2. Run `curl https://raw.githubusercontent.com/Onion-DAO/tornode/main/setup.sh --output oniondao.setup.sh && sudo bash oniondao.setup.sh $HOME && rm oniondao.setup.sh`
-
 ## Setup (the long version)
 
 In order to qualify for an Onion POAP, you need to run a Tor exit node. Ideally, you do so at a datacenter. We're going to assume you are using a VPS (virtual private server) with Ubuntu `20.04 LTS`.
 
 ### Step 1: purchase a VPS
 
-Not all VPS providers like it if you run a Tor exit node. The Tor community keeps a [ list of exit node friendly providers here ]( https://gitlab.torproject.org/legacy/trac/-/wikis/doc/GoodBadISPs ), and a community member hosts a list of [ those accepting Bitcoin here ]( https://torbitcoinvps.github.io/ ).
+Not all VPS providers like it if you run a Tor exit node.
+
+- OnionDAO keeps a [crowdsourced list of suitable providers here](https://docs.google.com/spreadsheets/d/1ztkonpfs0u3NP1HA-V6rhE6eK77W6y0Q8gG_yv9tI3s)
+- The Tor community keeps a [ list of exit node friendly providers here ]( https://community.torproject.org/relay/community-resources/good-bad-isps/ )
+- A crypto community member hosts a list of [ those accepting Bitcoin here ]( https://torbitcoinvps.github.io/ )
 
 Most VPS providers have different VPS options. Choose one that has at least 1.5GB RAM. When asked about an operating system, choose Ubuntu `20.04 LTS`.
 
@@ -52,3 +62,9 @@ sudo bash setup.sh
 ### Step 3: keep it running for a month
 
 After a month, the POAPs will de distributed through poap.delivery.
+
+---
+
+# Video instructions
+
+Do you prefer a video walkthrough? You can view a recording of our setup livestream [here in the Rocketeer Discord]( https://discord.com/channels/899629740766412890/959100274587344966/959193725458858064 ).
