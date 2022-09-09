@@ -9,6 +9,11 @@ binfolder=/usr/local/sbin
 rm -rf "$oniondaofolder"
 mkdir -p "$oniondaofolder"
 
+# Install dependencies
+echo "Installing dependencies..."
+sudo apt update -qq &> /dev/null
+sudo apt install -y git &> /dev/null
+
 # Write OnionDAO function as executable
 echo -e "\nCloning OnionDAO repository to $oniondaofolder"
 git clone --depth 1 https://github.com/Onion-DAO/tornode.git "$oniondaofolder" &> /dev/null
